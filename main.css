@@ -23,7 +23,9 @@
     --textarea-bg: var(--neutral-800);
     --textarea-clr: var(--neutral-200);
     --textarea-border-clr: var(--neutral-700);
+    --textarea-bg-hover: var(--neutral-700);
     --btn-bg: var(--neutral-700);
+    --btn-bg-hover: var(--neutral-600);
 }
 
 .light-theme {
@@ -33,7 +35,9 @@
     --textarea-bg: var(--neutral-100);
     --textarea-clr: var(--neutral-700);
     --textarea-border-clr: var(--neutral-200);
+    --textarea-bg-hover: var(--neutral-200);
     --btn-bg: var(--neutral-100);
+    --btn-bg-hover: var(--neutral-200);
 }
 
 *,
@@ -57,7 +61,7 @@ button {
 .content,
 .page-flex-content {
     width: 90vw;
-    max-width: 61,875rem;
+    max-width: 99rem;
     margin-inline: auto;
 }
 
@@ -83,6 +87,11 @@ body {
     justify-content: space-between;
 }
 
+.home-link:focus {
+    outline: 2px solid var(--purple-500);
+    outline-offset: 2px;
+}
+
 .home-link img {
     display: block;
     width: 18.5rem;
@@ -98,6 +107,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.theme-toggle-btn:focus {
+    outline: 2px solid var(--purple-500);
+    outline-offset: 2px;
 }
 
 /* USER TEXT ANALYZE SECTION */
@@ -135,6 +149,7 @@ textarea {
 
 textarea.error {
     box-shadow: 0 0 .8rem var(--orange-500);
+    border: 1px solid var(--orange-500);
 }
 
 .err-message {
@@ -142,6 +157,10 @@ textarea.error {
     color: var(--orange-500);
     font-size: 1.4rem;
     line-height: 130%;
+    display: none;
+}
+
+.err-message.show {
     display: flex;
     align-items: center;
     gap: .25rem;
@@ -168,6 +187,13 @@ textarea.error {
     border-radius: .5rem;
     border: 1px solid var(--textarea-border-clr);
     font-family: var(--ff-primary);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.char-limit.show {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* CHARACTER COUNT SECTION */
@@ -299,6 +325,114 @@ textarea.error {
     gap: .8rem;
 }
 
+.see-more-btn:focus {
+    outline: 2px solid var(--purple-500);
+    outline-offset: 2px;
+}
+
 html.light-theme .see-more-btn img {
     filter: invert();
+}
+
+/* MEDIA QUERIES */
+@media screen and (min-width: 48rem) {
+    .home-link img {
+        width: 24.5rem;
+    }
+
+    .theme-toggle-btn {
+        width: 4.4rem;
+        height: 4.4rem;
+    }
+
+    .page-title {
+        font-size: 6.4rem;
+        max-width: 12ch;
+        margin-inline: auto;
+    }
+
+    .err-message {
+        font-size: 1.6rem;
+        gap: .8rem;
+    }
+
+    .settings-wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    .checkbox-inputs-wrapper {
+        flex-direction: row;
+        align-items: center;
+        gap: 2.4rem;
+    }
+
+    .char-count-result {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        row-gap: 0rem;
+        column-gap: 1.6rem;
+    }
+
+    .result-box {
+        padding: 1.6rem 1.2rem;
+        height: 15rem;
+        background-position: 180% 0;
+    }
+
+    .result-box p:first-child {
+        font-size: 6.4rem;
+        line-height: 100%;
+        letter-spacing: 1px;
+    }
+
+    .letter-density-result {
+        padding-block: 2.4rem;
+    }
+
+    .letter-list-item {
+        grid-template-columns: auto 80% 1fr;
+        gap: 1.4rem;
+    }
+}
+
+@media screen and (min-width: 64rem) {
+    .page-header {
+        padding-block: 3.2rem;
+    }
+
+    .theme-toggle-btn:hover {
+        background-color: var(--btn-bg-hover);
+    }
+
+    .user-text-analyze {
+        padding-block: 4.8rem;
+    }
+
+    .user-text-input-form {
+        margin-top: 4.8rem;
+    }
+
+    textarea:hover {
+        background-color: var(--textarea-bg-hover);
+        cursor: pointer;
+    }
+
+    textarea:focus {
+        outline: none;
+        box-shadow: 0 0 .8rem var(--purple-500);
+        border: 1px solid var(--purple-500);
+    }
+
+    .result-box {
+        padding: 1.6rem 1.6rem;
+        height: 15rem;
+        background-position: 120% 0;
+    }
+
+    .letter-list-item {
+        grid-template-columns: auto 86% 1fr;
+        gap: 1.4rem;
+    }
 }
