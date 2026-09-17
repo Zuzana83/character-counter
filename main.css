@@ -316,7 +316,6 @@ input[type="checkbox"]:checked:focus-visible {
     visibility: visible;
 }
 
-
 /* CHARACTER COUNT SECTION */
 .characters-count {
     padding-bottom: 2.4rem;
@@ -359,6 +358,11 @@ input[type="checkbox"]:checked:focus-visible {
     line-height: 130%;
     opacity: 0;
     visibility: hidden;
+}
+
+#noSpace.show {
+    opacity: 1;
+    visibility: visible;
 }
 
 .char-box {

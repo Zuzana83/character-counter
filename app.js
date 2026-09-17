@@ -7,6 +7,7 @@ const charLimitEl = document.getElementById("characterLimit");
 const charLimitValueEl = document.getElementById("charLimit");
 const readingTimeEl = document.getElementById("readingTime");
 const charCountEl = document.getElementById("charCount");
+const noSpaceEl = document.getElementById("noSpace");
 const wordCountEl = document.getElementById("wordCount");
 const sentenceCountEl = document.getElementById("sentenceCount");
 const leadTextEl = document.querySelector(".lead-text");
@@ -27,8 +28,10 @@ function analyzeText() {
     // CHARACTER COUNT
     if(excludeSpaces) {
         charCount = textareaTextEl.value.replace(/\s/g, '').length
+        noSpaceEl.classList.add("show");
     } else {
         charCount = textareaTextEl.value.length;
+        noSpaceEl.classList.remove("show");
     }
     // CHARACTER LIMIT
     errMessageEl.classList.remove("show");
