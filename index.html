@@ -5,7 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
+   <script>
+    try {
+      const savedTheme = localStorage.getItem("theme");
+      if(savedTheme === "lightTheme") {
+        document.documentElement.classList.add(savedTheme);
+      }
+    } catch (error) {
+      localStorage.removeItem("theme");
+    }
+  </script>
   <title>Frontend Mentor | Character counter</title>
   <link rel="stylesheet" href="./main.css">
 </head>
@@ -13,10 +22,14 @@
   <header class="page-header">
     <div class="page-flex-content">
       <a href="index.html" class="home-link" aria-label="Navigate to homepage">
-        <img src="./assets/images/logo-dark-theme.svg" alt="character counter logo" />
+        <img src="./assets/images/logo-dark-theme.svg" alt="character counter logo, version for dark theme" id="darkLogo" />
+        <img src="./assets/images/logo-light-theme.svg" alt="character counter logo, version for light theme" id="lightLogo" />
       </a>
       <button type="button" class="theme-toggle-btn" id="themeToggleBtn" aria-label="Switch to light mode">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 22 22"><g clip-path="url(#a)"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.98" d="M11 1.833v1.834m0 14.666v1.834M3.666 11H1.833m3.955-5.212L4.49 4.492m11.72 1.296 1.297-1.296M5.788 16.215 4.49 17.512m11.72-1.296 1.297 1.296M20.166 11h-1.833m-2.75 0a4.583 4.583 0 1 1-9.167 0 4.583 4.583 0 0 1 9.167 0Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h22v22H0z"/></clipPath></defs></svg>
+        <!-- Sun Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 22 22" id="sunIcon"><g clip-path="url(#a)"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.98" d="M11 1.833v1.834m0 14.666v1.834M3.666 11H1.833m3.955-5.212L4.49 4.492m11.72 1.296 1.297-1.296M5.788 16.215 4.49 17.512m11.72-1.296 1.297 1.296M20.166 11h-1.833m-2.75 0a4.583 4.583 0 1 1-9.167 0 4.583 4.583 0 0 1 9.167 0Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h22v22H0z"/></clipPath></defs></svg>
+        <!-- Moon Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 22 22" id="moonIcon"><g clip-path="url(#b)"><path stroke="#12131A" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.98" d="M20.125 11.877A7.333 7.333 0 1 1 10.124 1.875a9.168 9.168 0 1 0 10 10.002Z"/></g><defs><clipPath id="b"><path fill="#fff" d="M0 0h22v22H0z"/></clipPath></defs></svg>
       </button>
     </div>
   </header>
@@ -26,8 +39,10 @@
         <h1 class="page-title">Analyze your text in real-time.</h1>
         <form class="user-text-input-form" id="userTextInputForm">
           <!-- TEXTAREA -->
-          <textarea name="textToAnalyze" autocomplete="off" id="textToAnalyze" placeholder="Start typing here… (or paste your text)"></textarea>
-          <div class="err-message"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" fill="none" viewBox="0 0 14 15"><path fill="#FE8159" d="M7 1.344A5.899 5.899 0 0 0 1.094 7.25 5.882 5.882 0 0 0 7 13.156a5.899 5.899 0 0 0 5.906-5.906c0-3.254-2.68-5.906-5.906-5.906Zm0-.875c3.719 0 6.781 3.062 6.781 6.781 0 3.746-3.062 6.781-6.781 6.781A6.78 6.78 0 0 1 .219 7.25C.219 3.531 3.254.469 7 .469Zm-.984 9.406h.328V6.594h-.328a.316.316 0 0 1-.329-.328v-.22c0-.163.137-.327.329-.327h1.312c.164 0 .328.164.328.328v3.828h.328c.164 0 .329.164.329.328v.219a.332.332 0 0 1-.329.328H6.016a.316.316 0 0 1-.329-.328v-.219c0-.164.137-.328.329-.328ZM7 3.312a.9.9 0 0 1 .875.876c0 .492-.41.875-.875.875a.864.864 0 0 1-.875-.875c0-.465.383-.875.875-.875Z"/></svg><p>Limit reached! Your text exceeds <span id="characterLimitAmount">300</span> characters.</p>
+          <label for="textToAnalyze" class="sr-only">text to analyze</label>
+          <textarea name="textToAnalyze" autocomplete="off" id="textToAnalyze" placeholder="Start typing here… (or paste your text)" aria-describedby="charLimitMsg"></textarea>
+          <!-- Error message -->
+          <div class="err-message" id="charLimitMsg" aria-live="polite"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" fill="none" viewBox="0 0 14 15"><path fill="#FE8159" d="M7 1.344A5.899 5.899 0 0 0 1.094 7.25 5.882 5.882 0 0 0 7 13.156a5.899 5.899 0 0 0 5.906-5.906c0-3.254-2.68-5.906-5.906-5.906Zm0-.875c3.719 0 6.781 3.062 6.781 6.781 0 3.746-3.062 6.781-6.781 6.781A6.78 6.78 0 0 1 .219 7.25C.219 3.531 3.254.469 7 .469Zm-.984 9.406h.328V6.594h-.328a.316.316 0 0 1-.329-.328v-.22c0-.163.137-.327.329-.327h1.312c.164 0 .328.164.328.328v3.828h.328c.164 0 .329.164.329.328v.219a.332.332 0 0 1-.329.328H6.016a.316.316 0 0 1-.329-.328v-.219c0-.164.137-.328.329-.328ZM7 3.312a.9.9 0 0 1 .875.876c0 .492-.41.875-.875.875a.864.864 0 0 1-.875-.875c0-.465.383-.875.875-.875Z"/></svg><p></p>
           </div>
           <div class="settings-wrapper">
             <div class="checkbox-inputs-wrapper">
@@ -40,7 +55,7 @@
               <div class="single-checkbox-input">
                 <input type="checkbox" name="characterLimit" id="characterLimit">
                 <label for="characterLimit">Set Character Limit</label>
-                <input type="text" name="charLimit" id="charLimit" class="char-limit">
+                <input type="number" name="charLimit" id="charLimit" class="char-limit" min="1" step="1" autocomplete="off">
               </div>
             </div>
             <p class="reading-time-count">Approx. reading time: <span id="readingTime">0</span> minutes</p>
@@ -54,17 +69,17 @@
         <article class="char-count-result">
           <!-- Characters -->
           <div class="result-box char-box">
-            <p id="charCount">278</p>
+            <p id="charCount">00</p>
             <p>Total Characters <span id="noSpace">(no space)</span></p>
           </div>
           <!-- Words -->
           <div class="result-box word-box">
-            <p id="wordCount">15</p>
+            <p id="wordCount">00</p>
             <p>Word Count</p>
           </div>
           <!-- Sentences -->
           <div class="result-box sentence-box">
-            <p id="sentenceCount">04</p>
+            <p id="sentenceCount">00</p>
             <p>Sentences Count</p>
           </div>
         </article>
@@ -74,42 +89,14 @@
       <div class="content">
         <h2 class="section-title">Letter Density</h2>
         <p class="lead-text">No characters found. Start typing to see letter density.</p>
-        <ul class="letter-density-list" id="densityList">
-          <li class="letter-list-item">
-            <p class="letter">K</p>
-            <div class="bar">
-              <div class="bar-inner"></div>
-            </div>
-            <p class="proportion-calc">
-              <span class="proportion">40</span>/
-              <span class="percentage">(16.06%)</span>
-            </p>
-          </li>
-          <li class="letter-list-item">
-            <p class="letter">E</p>
-            <div class="bar">
-              <div class="bar-inner"></div>
-            </div>
-            <p class="proportion-calc">
-              <span class="proportion">29</span>/
-              <span class="percentage">(11.25%)</span>
-            </p>
-          </li>
-          <li class="letter-list-item">
-            <p class="letter">I</p>
-            <div class="bar">
-              <div class="bar-inner"></div>
-            </div>
-            <p class="proportion-calc">
-              <span class="proportion">8</span>/
-              <span class="percentage">(5.25%)</span>
-            </p>
-          </li>
-        </ul>
-        <button class="see-more-btn" id="seeMoreBtn">
-          See more
-          <img src="./assets/images/icon-chevron.svg" alt="">
-        </button>
+        <div class="density-results" id="densityResults">
+          <ul class="letter-density-list" id="densityList">
+          </ul>
+          <button class="see-more-btn" id="seeMoreBtn" aria-expanded="false" aria-controls="densityList"><span>See more</span>
+            <svg width="11" height="7" viewBox="0 0 11 7" fill="" xmlns="http://www.w3.org/2000/svg"><path d="M4.78125 5.875L0.15625 1.28125C0 1.15625 0 0.90625 0.15625 0.75L0.78125 0.15625C0.9375 0 1.15625 0 1.3125 0.15625L5.0625 3.84375L8.78125 0.15625C8.9375 0 9.1875 0 9.3125 0.15625L9.9375 0.75C10.0938 0.90625 10.0938 1.15625 9.9375 1.28125L5.3125 5.875C5.15625 6.03125 4.9375 6.03125 4.78125 5.875Z" fill="#ffffff"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
   </main>
