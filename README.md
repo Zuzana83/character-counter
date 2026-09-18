@@ -39,7 +39,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: https://github.com/Zuzana83/character-counter
+- Solution URL: https://github.com/Zuzana83/character-counter/
 - Live Site URL: https://zuzana83.github.io/character-counter/
 
 ## My process
