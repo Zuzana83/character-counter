@@ -190,7 +190,7 @@ textarea {
     letter-spacing: -0.6px;
 }
 
-textarea.error {
+#textToAnalyze.error {
     box-shadow: 0 0 .8rem var(--orange-500);
     border: 1px solid var(--orange-500);
 }
