@@ -16,6 +16,9 @@ const letterDensityListEl = document.getElementById("densityList");
 const seeMoreBtnEl = document.getElementById("seeMoreBtn");
 const seeMoreTxtEl= seeMoreBtnEl.querySelector("span");
 const seeMoreSvgEl = seeMoreBtnEl.querySelector("svg");
+const charSummaryEl = document.getElementById("charSummary");
+
+let charResultsTimer;
 
 function analyzeText() {
     let charCount = 0;
@@ -71,6 +74,8 @@ function analyzeText() {
     charCountEl.textContent = charCount < 10 ? `0${charCount}` : charCount;
     wordCountEl.textContent = wordCount < 10 ? `0${wordCount}` : wordCount; 
     sentenceCountEl.textContent = sentenceCount < 10 ? `0${sentenceCount}` : sentenceCount;
+
+    announceCharResults(charCount, wordCount, sentenceCount);
 
     analyzeTextDensity();
 }
