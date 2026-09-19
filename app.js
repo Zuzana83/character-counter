@@ -39,7 +39,7 @@ function analyzeText() {
     if(charLimit) {
         let charLimitValue = Number(charLimitValueEl.value);
         if(!isNaN(charLimitValue) && charLimitValue > 0) {
-             if(charCount >= charLimitValue) {
+             if(charCount > charLimitValue) {
                 errMessageEl.classList.add("show");
                 errMessageParagraphEl.textContent = `Limit reached! Your text exceeds ${charLimitValue} characters.`;
                 textareaTextEl.classList.add("error");

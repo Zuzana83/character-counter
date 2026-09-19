@@ -12,7 +12,11 @@
         document.documentElement.classList.add(savedTheme);
       }
     } catch (error) {
-      localStorage.removeItem("theme");
+      try {
+        localStorage.removeItem("theme");
+      } catch (error) {
+        console.warn("Could not clean up corrupted theme preference"); 
+      }
     }
   </script>
   <title>Frontend Mentor | Character counter</title>
